@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using notes_service.Config;
 
 namespace notes_service.Controllers
 {
@@ -11,6 +13,13 @@ namespace notes_service.Controllers
     [Route("[controller]")]
     public class NotesController : ControllerBase
     {
+        private IOptions<NotesConfig> config;
+
+        public NotesController(IOptions<NotesConfig> config)
+        {
+            this.config = config;
+        }
+
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -18,6 +27,12 @@ namespace notes_service.Controllers
         {
             "hallo", "dit", "is", "een", "test"
         };
+        }
+
+        [HttpGet("/test")]
+        public object Test()
+        {
+            return  config.Value.TestValue;
         }
     }
 }
