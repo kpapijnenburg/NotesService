@@ -23,6 +23,9 @@ steps:
   - task: Docker@2
     displayName: Build and Push
     inputs:
-      command: BuildAndPush
-      repository: $(dockerHubId)/$(imageName)
-      Dockerfile: Dockerfile
+      repository: '$(dockerHubId)/$(imageName)'
+      command: 'BuildAndPush'
+      Dockerfile: 'Dockerfile'
+      tags: |
+        $(Build.BuildId)
+        latest
