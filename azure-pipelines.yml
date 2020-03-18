@@ -11,6 +11,7 @@ pool:
 
 variables:
   imageName: notes-service
+  dockerHubAccount: koenpijnenburg
 
 steps:
   - task: Docker@2
