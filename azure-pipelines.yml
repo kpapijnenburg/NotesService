@@ -15,9 +15,13 @@ variables:
 
 steps:
   - task: Docker@2
-    displayName: Build and push image
+    displayName: Login to dockerHub
     inputs:
-      command: buildAndPush
+      command: Login
       containerRegistry: DockerHub
-      repository: notes-service
+  - task: Docker@2
+    displayName: Build and Push
+    inputs:
+      command: BuildAndPush
+      repository: koenpijnenburg/notes-service
       Dockerfile: Dockerfile
