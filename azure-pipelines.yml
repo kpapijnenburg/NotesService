@@ -22,5 +22,5 @@ steps:
   - task: Docker@2
     displayName: Push image
     inputs:
-      repository: koenpijnenburg/notes-service
+      repository: $(dockerHubAccount)/$(imageName)
       command: push
