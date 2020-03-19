@@ -7,7 +7,6 @@ namespace notes_service.Models
 
         public int ID { get; set; }
         public string Content { get; set; }
-
         public DateTime Created { get; set; }
         public HandwrittenText HandwrittenText { get; set; }
 
@@ -17,6 +16,10 @@ namespace notes_service.Models
             Content = content;
             HandwrittenText = handwrittenText;
             Created = created;
+        }
+        public Note()
+        {
+            
         }
     }
 }

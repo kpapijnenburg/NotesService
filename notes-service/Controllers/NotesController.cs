@@ -13,11 +13,10 @@ namespace notes_service.Controllers
     [Route("[controller]")]
     public class NotesController : ControllerBase
     {
-        private IOptions<NotesConfig> config;
+        
 
-        public NotesController(IOptions<NotesConfig> config)
+        public NotesController()
         {
-            this.config = config;
         }
 
         [HttpGet]
@@ -27,12 +26,6 @@ namespace notes_service.Controllers
         {
             "hallo", "dit", "is", "een", "test"
         };
-        }
-
-        [HttpGet("/test")]
-        public object Test()
-        {
-            return  config.Value.TestValue;
         }
     }
 }

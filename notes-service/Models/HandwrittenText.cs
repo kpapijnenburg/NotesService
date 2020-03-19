@@ -14,5 +14,9 @@ namespace notes_service.Models
             Image = image;
             this.state = state;
         }
+        public HandwrittenText()
+        {
+
+        }
     }
 }
