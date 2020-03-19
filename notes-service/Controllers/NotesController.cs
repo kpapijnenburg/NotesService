@@ -1,31 +1,25 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using notes_service.Config;
+using notes_service.Context;
+using notes_service.Models;
+
 
 namespace notes_service.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class NotesController : ControllerBase
     {
-        
+        private INotesContext context;
 
         public NotesController()
         {
+            context = new NotesTestContext();
         }
 
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("/notes/{id}")]
+        public Note Get(int id)
         {
-            return new List<string>()
-        {
-            "hallo", "dit", "is", "een", "test"
-        };
+            return context.Get(id);
         }
     }
 }
