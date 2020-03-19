@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace notes_service.Controllers
+namespace NotesService.Controllers
 {
     [ApiController]
     [Route("[controller]")]

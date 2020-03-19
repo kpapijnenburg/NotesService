@@ -1,6 +1,6 @@
 using System;
 
-namespace notes_service
+namespace NotesService
 {
     public class WeatherForecast
     {
