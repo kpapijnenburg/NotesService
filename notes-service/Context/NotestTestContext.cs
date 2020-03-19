@@ -1,3 +1,4 @@
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using notes_service.Models;
@@ -30,7 +31,7 @@ namespace notes_service.Context
 
         public Note Get(int id)
         {
-            throw new System.NotImplementedException();
+            return Notes.FirstOrDefault(note => note.ID == id);
         }
 
         public IEnumerable<Note> GetAll()
