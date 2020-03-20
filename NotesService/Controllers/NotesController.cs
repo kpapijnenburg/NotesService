@@ -44,21 +44,5 @@ namespace notes_service.Controllers
 
             return Ok(notes);
         }
-
-        [HttpPost("/notes")]
-        public IActionResult Create(string imageData)
-        {
-            var note = new Note()
-            {
-                HandwrittenText =
-                {
-                    Image = imageData,
-                    state = State.Pending
-                },
-                Created = DateTime.Now
-            };
-
-            return Ok(note);
-        }
     }
 }

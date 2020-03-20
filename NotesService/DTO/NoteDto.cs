@@ -8,20 +8,13 @@ namespace NotesService.DTO
 {
     public class NoteDto
     {
-        public string Content { get; set; }
+        public string Title { get; set; }
 
         public Note ToObject()
         {
             return new Note()
             {
-                Content = Content,
-                Created = DateTime.Now,
-                ID = 0,
-                HandwrittenText = new HandwrittenText()
-                {
-                    Image = "https://images/image/png",
-                    state = State.Pending
-                }
+                Title = Title
             };
         }
     }

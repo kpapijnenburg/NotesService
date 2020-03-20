@@ -30,7 +30,7 @@ namespace NotesService.IntegrationTests
 
         public Note Get(int id)
         {
-            return Notes.Find(note => note.ID == id);
+            return Notes.Find(note => note.Id == id);
         }
 
         public IEnumerable<Note> GetAll()
@@ -40,7 +40,7 @@ namespace NotesService.IntegrationTests
 
         public bool Update(Note note)
         {
-            return Notes.Find(toFind => toFind.ID == note.ID) != null;
+            return Notes.Find(toFind => toFind.Id == note.Id) != null;
 
         }
     }

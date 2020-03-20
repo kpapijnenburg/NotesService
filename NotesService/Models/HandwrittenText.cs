@@ -9,6 +9,9 @@ namespace notes_service.Models
         public byte[] Image { get; set; }
         public State state;
 
+        public int NoteId { get; set; }
+        public Note Note { get; set; }
+
         public HandwrittenText(byte[] image, State state)
         {
             Image = image;
