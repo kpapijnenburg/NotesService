@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using notes_service.Context;
 using notes_service.Models;
-
+using NotesService.DTO;
 
 namespace notes_service.Controllers
 {
@@ -11,15 +14,51 @@ namespace notes_service.Controllers
     {
         private INotesContext context;
 
-        public NotesController()
+        public NotesController(INotesContext context)
         {
-            context = new NotesTestContext();
+            this.context = context;
         }
 
         [HttpGet("/notes/{id}")]
-        public Note Get(int id)
+        public IActionResult Get(int id)
         {
-            return context.Get(id);
+            var note = context.Get(id);
+
+            if (note == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(note);
+        }
+
+        [HttpGet("/notes")]
+        public IActionResult GetAll()
+        {
+            var notes = context.GetAll();
+
+            if (notes == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(notes);
+        }
+
+        [HttpPost("/notes")]
+        public IActionResult Create(string imageData)
+        {
+            var note = new Note()
+            {
+                HandwrittenText =
+                {
+                    Image = imageData,
+                    state = State.Pending
+                },
+                Created = DateTime.Now
+            };
+
+            return Ok(note);
         }
     }
 }

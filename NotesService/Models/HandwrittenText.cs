@@ -6,10 +6,10 @@ namespace notes_service.Models
     }
     public class HandwrittenText
     {
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         public State state;
 
-        public HandwrittenText(string image, State state)
+        public HandwrittenText(byte[] image, State state)
         {
             Image = image;
             this.state = state;

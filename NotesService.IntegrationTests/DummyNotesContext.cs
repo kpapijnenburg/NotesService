@@ -1,20 +1,19 @@
-using System.Linq;
+﻿using notes_service.Context;
+using notes_service.Models;
 using System;
 using System.Collections.Generic;
-using notes_service.Models;
 
-namespace notes_service.Context
+namespace NotesService.IntegrationTests
 {
-    public class NotesTestContext : INotesContext
+    public class DummyNotesContext : INotesContext
     {
-
         private List<Note> Notes;
 
-        public NotesTestContext()
+        public DummyNotesContext()
         {
-            Notes = new List<Note>()
+            this.Notes = new List<Note>()
             {
-                new Note(1, "Dit is een test notitie", null, DateTime.Now)
+                new Note(1, "Test notitie", null, DateTime.Now)
             };
         }
 
@@ -31,7 +30,7 @@ namespace notes_service.Context
 
         public Note Get(int id)
         {
-            return Notes.FirstOrDefault(note => note.ID == id);
+            return Notes.Find(note => note.ID == id);
         }
 
         public IEnumerable<Note> GetAll()
@@ -41,7 +40,8 @@ namespace notes_service.Context
 
         public bool Update(Note note)
         {
-            throw new System.NotImplementedException();
+            return Notes.Find(toFind => toFind.ID == note.ID) != null;
+
         }
     }
 }
