@@ -16,6 +16,13 @@ namespace NotesService.DAL.Configurations
                 .WithOne(n => n.HandwrittenText)
                 .HasForeignKey<HandwrittenText>(h => h.NoteId);
 
+            builder
+                .Property(h => h.State)
+                .HasConversion(
+                    s => s.ToString(),
+                    s => (State)Enum.Parse(typeof(State), s)
+                );
+
             builder.HasData(
                 new HandwrittenText()
                 {
@@ -23,6 +30,7 @@ namespace NotesService.DAL.Configurations
                     Image = null,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
+                    State = State.Pending,
                     NoteId = 1
                 }
             );

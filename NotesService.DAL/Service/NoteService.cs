@@ -17,12 +17,18 @@ namespace NotesService.DAL.Service
 
         public Note Create(Note note)
         {
-            throw new NotImplementedException();
+            // Set Handwriting processing state to pending for newly created Notes.
+            note.HandwrittenText.State = State.Pending;
+
+            var entry = context.Add(note);
+            context.SaveChanges();
+
+            return entry.Entity;
         }
 
-        public bool delete(Note note)
+        public bool Delete(Note note)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException();            
         }
 
         public Note Get(int id)

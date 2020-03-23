@@ -23,7 +23,7 @@ namespace NotesService.IntegrationTests
             return note;
         }
 
-        public bool delete(Note note)
+        public bool Delete(Note note)
         {
             return Notes.Remove(note);
         }

@@ -9,7 +9,7 @@ namespace NotesService.DAL.Service
         IEnumerable<Note> GetAll();
         Note Create(Note note);
         bool Update(Note note);
-        bool delete(Note note);
+        bool Delete(Note note);
 
     }
 }
