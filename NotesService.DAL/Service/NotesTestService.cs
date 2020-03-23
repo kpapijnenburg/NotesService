@@ -1,5 +1,5 @@
-﻿using notes_service.Context;
-using notes_service.Models;
+﻿using NotesService.Context;
+using NotesService.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

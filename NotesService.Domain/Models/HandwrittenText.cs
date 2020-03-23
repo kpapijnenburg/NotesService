@@ -1,6 +1,6 @@
 using NotesService.Domain;
 
-namespace notes_service.Domain.Models
+namespace NotesService.Domain.Models
 {
     public enum State
     {

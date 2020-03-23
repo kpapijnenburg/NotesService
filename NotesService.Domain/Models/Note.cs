@@ -1,8 +1,9 @@
+using NotesService.Domain;
 using System;
 
-namespace notes_service.Domain.Models
+namespace NotesService.Domain.Models
 {
-    public class Note
+    public class Note : BaseEntity
     {
 
         public string Title { get; set; }
@@ -11,10 +12,8 @@ namespace notes_service.Domain.Models
 
         public Note(int iD, string content, HandwrittenText handwrittenText, DateTime created)
         {
-            Id = iD;
             Content = content;
             HandwrittenText = handwrittenText;
-            Created = created;
         }
         public Note()
         {

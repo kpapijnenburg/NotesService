@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using notes_service.Models;
+using NotesService.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
