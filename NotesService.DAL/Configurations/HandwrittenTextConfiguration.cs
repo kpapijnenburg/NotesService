@@ -13,7 +13,8 @@ namespace NotesService.DAL.Configurations
         {
             builder
                 .HasOne(h => h.Note)
-                .WithOne(n => n.HandwrittenText);
+                .WithOne(n => n.HandwrittenText)
+                .HasForeignKey<HandwrittenText>(h => h.NoteId);
 
             builder.HasData(
                 new HandwrittenText()
