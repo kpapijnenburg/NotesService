@@ -8,6 +8,8 @@ namespace NotesService.Domain.Models
 
         public string Title { get; set; }
         public string Content { get; set; }
+
+        public int HandwrittenTextId { get; set; }
         public HandwrittenText HandwrittenText { get; set; }
 
         public Note(int iD, string content, HandwrittenText handwrittenText, DateTime created)
