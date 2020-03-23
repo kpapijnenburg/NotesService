@@ -28,7 +28,10 @@ namespace NotesService
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             if (Environment.IsEnvironment("Testing"))
+            {
+                services.AddSingleton<INotesService, NotesTestService>();
                 return;
+            }
 
             services.AddDbContext<NotesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("NotesContext")));
             services.AddTransient<INotesService, NoteService>();

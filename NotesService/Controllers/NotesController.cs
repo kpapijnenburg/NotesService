@@ -29,14 +29,7 @@ namespace notes_service.Controllers
         [HttpGet("/notes")]
         public IActionResult GetAll()
         {
-            var notes = service.GetAll();
-
-            if (notes == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(notes);
+            return Ok(service.GetAll());
         }
     }
 }
