@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using notes_service.Controllers;
-using NotesService.Context;
+using NotesService.DAL.Service;
 using NotesService.Domain.Models;
 using NUnit.Framework;
 

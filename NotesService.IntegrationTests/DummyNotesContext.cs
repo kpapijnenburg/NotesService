@@ -1,4 +1,4 @@
-﻿using NotesService.Context;
+﻿using NotesService.DAL.Service;
 using NotesService.Domain.Models;
 using System;
 using System.Collections.Generic;

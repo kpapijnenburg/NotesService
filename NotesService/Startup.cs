@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-using NotesService.Context;
+using NotesService.DAL.Service;
+using NotesService.DAL;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace NotesService
 {
@@ -26,8 +28,9 @@ namespace NotesService
 
             if (Environment.IsEnvironment("Testing"))
                 return;
-                
-            services.AddSingleton<INotesService, NotesTestService>();
+
+            services.AddDbContext<NotesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("NotesContext")));
+            services.AddSingleton<INotesService, NoteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

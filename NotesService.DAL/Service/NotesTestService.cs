@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NotesService.Context
+namespace NotesService.DAL.Service
 {
     public class NotesTestService : INotesService
     {

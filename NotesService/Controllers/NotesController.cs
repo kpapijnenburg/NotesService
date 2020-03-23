@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using NotesService.Context;
-using NotesService.DAL;
-using NotesService.Domain.Models;
-using NotesService.DTO;
+using NotesService.DAL.Service;
 
 namespace notes_service.Controllers
 {

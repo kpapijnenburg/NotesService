@@ -5,12 +5,12 @@ using NotesService.Domain.Models;
 
 namespace NotesService.DAL
 {
-    class NotesContext : DbContext
+    public class NotesContext : DbContext
     {
         DbSet<Note> Notes { get; set; }
         DbSet<HandwrittenText> HandwrittenTexts { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) : base(options)
+        public NotesContext(DbContextOptions options) : base(options)
         {
         }
 
@@ -27,7 +27,7 @@ namespace NotesService.DAL
         //{
         //    var entries = ChangeTracker
         //        .Entries();
-                
+
 
         //    return base.SaveChanges();
         //}

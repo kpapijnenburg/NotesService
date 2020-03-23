@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using NotesService.Domain.Models;
 
-namespace NotesService.Context
+namespace NotesService.DAL.Service
 {
     public interface INotesService
     {
