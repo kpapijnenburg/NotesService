@@ -1,14 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NotesService.DAL.Configurations;
+using NotesService.Domain;
 using NotesService.Domain.Models;
-
+using System;
+using System.Linq;
 
 namespace NotesService.DAL
 {
     public class NotesContext : DbContext
     {
-        DbSet<Note> Notes { get; set; }
-        DbSet<HandwrittenText> HandwrittenTexts { get; set; }
+        public DbSet<Note> Notes { get; set; }
+        public DbSet<HandwrittenText> HandwrittenTexts { get; set; }
 
         public NotesContext(DbContextOptions options) : base(options)
         {
@@ -22,14 +24,24 @@ namespace NotesService.DAL
             base.OnModelCreating(modelBuilder);
         }
 
-        //// Override SaveChanges to always set CreatedAt and UpdatedAt fields when needed.
-        //public override int SaveChanges()
-        //{
-        //    var entries = ChangeTracker
-        //        .Entries();
+        // Override SaveChanges to always set CreatedAt and UpdatedAt fields when needed.
+        public override int SaveChanges()
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
+            foreach (var entry in entries)
+            {
+                ((BaseEntity)entry.Entity).UpdatedAt = DateTime.Now;
 
-        //    return base.SaveChanges();
-        //}
+                if (entry.State == EntityState.Added)
+                {
+                    ((BaseEntity)entry.Entity).CreatedAt = DateTime.Now;
+                }
+            }
+
+            return base.SaveChanges();
+        }
     }
 }
