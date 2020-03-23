@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotesService.Tests", "Notes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotesService.IntegrationTests", "NotesService.IntegrationTests\NotesService.IntegrationTests.csproj", "{B973EB3F-28C0-48BF-A661-D17147126E8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesService.DAL", "NotesService.DAL\NotesService.DAL.csproj", "{2CE3D8C1-57DC-4488-9923-7BC5CCC5DCC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotesService.DAL", "NotesService.DAL\NotesService.DAL.csproj", "{2CE3D8C1-57DC-4488-9923-7BC5CCC5DCC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesService.Domain", "NotesService.Domain\NotesService.Domain.csproj", "{AFDF5D87-FB4C-414B-BF24-839E817BD8E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{2CE3D8C1-57DC-4488-9923-7BC5CCC5DCC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CE3D8C1-57DC-4488-9923-7BC5CCC5DCC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CE3D8C1-57DC-4488-9923-7BC5CCC5DCC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFDF5D87-FB4C-414B-BF24-839E817BD8E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFDF5D87-FB4C-414B-BF24-839E817BD8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFDF5D87-FB4C-414B-BF24-839E817BD8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFDF5D87-FB4C-414B-BF24-839E817BD8E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

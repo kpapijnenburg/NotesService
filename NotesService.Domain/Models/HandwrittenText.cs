@@ -1,10 +1,12 @@
-namespace notes_service.Models
+using NotesService.Domain;
+
+namespace notes_service.Domain.Models
 {
     public enum State
     {
         Finished, Pending, Error
     }
-    public class HandwrittenText
+    public class HandwrittenText: BaseEntity
     {
         public byte[] Image { get; set; }
         public State state;
