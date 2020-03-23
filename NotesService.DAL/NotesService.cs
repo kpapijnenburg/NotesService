@@ -6,11 +6,11 @@ using System.Text;
 
 namespace NotesService.DAL
 {
-    class NotesContext : DbContext
+    class NotesService : DbContext
     {
         private readonly string connectionString;
 
-        public NotesContext(string connectionString)
+        public NotesService(string connectionString)
         {
             this.connectionString = connectionString;
         }

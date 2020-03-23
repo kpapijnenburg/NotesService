@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using notes_service.Models;
+using notes_service.Domain.Models;
 
 namespace notes_service.Context
 {
-    public interface INotesContext
+    public interface INotesService
     {
         Note Get(int id);
         IEnumerable<Note> GetAll();

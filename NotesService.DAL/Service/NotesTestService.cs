@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace NotesService.Context
 {
-    public class NotesTestContext : INotesContext
+    public class NotesTestService : INotesService
     {
 
         private List<Note> Notes;
 
-        public NotesTestContext()
+        public NotesTestService()
         {
             this.Notes = new List<Note>()
             {
