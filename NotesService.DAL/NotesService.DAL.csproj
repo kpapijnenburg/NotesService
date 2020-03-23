@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NotesService.Domain\NotesService.Domain.csproj" />
-    <ProjectReference Include="..\NotesService\NotesService.csproj" />
   </ItemGroup>
 
 </Project>

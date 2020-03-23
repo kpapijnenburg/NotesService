@@ -10,5 +10,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NotesService.DAL\NotesService.DAL.csproj" />
+    <ProjectReference Include="..\NotesService.Domain\NotesService.Domain.csproj" />
+  </ItemGroup>
+
 
 </Project>

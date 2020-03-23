@@ -1,9 +1,6 @@
-﻿using NotesService.Context;
-using NotesService.Domain.Models;
+﻿using NotesService.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NotesService.Context
 {
@@ -16,7 +13,7 @@ namespace NotesService.Context
         {
             this.Notes = new List<Note>()
             {
-                new Note(1, "Test notitie", null, DateTime.Now)
+                new Note() {Id = 1, Title = "Test notitie", Content = "Test Content", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now}
             };
         }
 

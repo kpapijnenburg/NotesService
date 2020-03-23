@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using notes_service.Context;
-using notes_service.Models;
+using NotesService.Context;
+using NotesService.DAL;
+using NotesService.Domain.Models;
 using NotesService.DTO;
 
 namespace notes_service.Controllers
@@ -12,17 +13,17 @@ namespace notes_service.Controllers
     [ApiController]
     public class NotesController : ControllerBase
     {
-        private INotesContext context;
+        private readonly INotesService service;
 
-        public NotesController(INotesContext context)
+        public NotesController(INotesService service)
         {
-            this.context = context;
+            this.service = service;
         }
 
         [HttpGet("/notes/{id}")]
         public IActionResult Get(int id)
         {
-            var note = context.Get(id);
+            var note = service.Get(id);
 
             if (note == null)
             {
@@ -35,7 +36,7 @@ namespace notes_service.Controllers
         [HttpGet("/notes")]
         public IActionResult GetAll()
         {
-            var notes = context.GetAll();
+            var notes = service.GetAll();
 
             if (notes == null)
             {

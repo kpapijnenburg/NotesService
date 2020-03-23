@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using notes_service.Context;
+using NotesService.Context;
 
 namespace NotesService.IntegrationTests
 {
@@ -13,7 +13,7 @@ namespace NotesService.IntegrationTests
 
             builder.ConfigureServices(services =>
             {
-                services.AddSingleton<INotesContext, DummyNotesContext>();
+                services.AddSingleton<INotesService, DummyNotesContext>();
             });
 
             base.ConfigureWebHost(builder);

@@ -1,24 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
-using notes_service.Context;
 using notes_service.Controllers;
-using notes_service.Models;
+using NotesService.Context;
+using NotesService.Domain.Models;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NotesService.Tests
 {
     public class NotesControllerTests
     {
-        private Mock<INotesContext> contextMock;
+        private Mock<INotesService> contextMock;
         private NotesController controller;
 
         [SetUp]
         public void SetUp()
         {
-            contextMock = new Mock<INotesContext>();
+            contextMock = new Mock<INotesService>();
             controller = new NotesController(contextMock.Object);
         }
 
