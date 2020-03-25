@@ -7,11 +7,12 @@ using System.Net;
 
 namespace NotesService.IntegrationTests
 {
-    public class NotesControllerTests : IClassFixture<WebApplicationFactory<Startup>>
+    //TODO: Gaat toevallig goed. 
+    public class NotesControllerTests : IClassFixture<NotesServiceFactory>
     {
-        private readonly WebApplicationFactory<Startup> factory;
+        private readonly NotesServiceFactory factory;
 
-        public NotesControllerTests(WebApplicationFactory<Startup> factory)
+        public NotesControllerTests(NotesServiceFactory factory)
         {
             this.factory = factory;
         }
@@ -37,7 +38,7 @@ namespace NotesService.IntegrationTests
         }
 
         [Fact]
-        public async Task Fuok()
+        public async Task Get()
         {
             var client = factory.CreateClient();
 

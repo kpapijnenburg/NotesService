@@ -26,7 +26,7 @@ namespace NotesService.Tests
 
             contextMock.Setup(c => c.Get(It.IsAny<int>())).Returns(note);
 
-            var result = controller.Get(1);
+            var result = controller.GetById(1);
             var anus = result as OkObjectResult;
 
             Assert.AreEqual(note, result);

@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 using NotesService.DAL.Service;
 using NotesService.DAL;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using Newtonsoft.Json;
 
 namespace NotesService
@@ -26,12 +25,6 @@ namespace NotesService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
-
-            if (Environment.IsEnvironment("Testing"))
-            {
-                services.AddSingleton<INotesService, NotesTestService>();
-                return;
-            }
 
             services.AddDbContext<NotesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("NotesContext")));
             services.AddTransient<INotesService, NoteService>();

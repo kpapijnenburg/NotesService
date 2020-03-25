@@ -5,7 +5,7 @@ using NotesService.DAL.Service;
 
 namespace NotesService.IntegrationTests
 {
-    class NotesServiceFactory : WebApplicationFactory<Startup>
+     public class NotesServiceFactory : WebApplicationFactory<Startup>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
