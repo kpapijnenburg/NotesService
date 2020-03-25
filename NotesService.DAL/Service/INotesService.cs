@@ -5,9 +5,9 @@ namespace NotesService.DAL.Service
 {
     public interface INotesService
     {
-        Note Get(int id);
+        Note GetById(int id);
         IEnumerable<Note> GetAll();
-        Note Create(Note note);
+        Note Add(Note note);
         bool Update(Note note);
         bool Delete(Note note);
 

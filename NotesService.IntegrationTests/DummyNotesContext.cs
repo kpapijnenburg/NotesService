@@ -32,7 +32,7 @@ namespace NotesService.IntegrationTests
             };
         }
 
-        public Note Create(Note note)
+        public Note Add(Note note)
         {
             Notes.Add(note);
             return note;
@@ -43,7 +43,7 @@ namespace NotesService.IntegrationTests
             return Notes.Remove(note);
         }
 
-        public Note Get(int id)
+        public Note GetById(int id)
         {
             return Notes.FirstOrDefault(note => note.Id == id);
         }

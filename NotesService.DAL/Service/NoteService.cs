@@ -15,11 +15,8 @@ namespace NotesService.DAL.Service
             this.context = context;
         }
 
-        public Note Create(Note note)
+        public Note Add(Note note)
         {
-            // Set Handwriting processing state to pending for newly created Notes.
-            note.HandwrittenText.State = State.Pending;
-
             var entry = context.Add(note);
             context.SaveChanges();
 
@@ -31,11 +28,12 @@ namespace NotesService.DAL.Service
             throw new NotImplementedException();            
         }
 
-        public Note Get(int id)
+        public Note GetById(int id)
         {
-            return context.Notes
+            var note =  context.Notes
                 .Include(n => n.HandwrittenText)
                 .FirstOrDefault(n => n.Id == id);
+            return note;
         }
 
         public IEnumerable<Note> GetAll()

@@ -17,7 +17,7 @@ namespace NotesService.DAL.Service
             };
         }
 
-        public Note Create(Note note)
+        public Note Add(Note note)
         {
             Notes.Add(note);
             return note;
@@ -28,7 +28,7 @@ namespace NotesService.DAL.Service
             return Notes.Remove(note);
         }
 
-        public Note Get(int id)
+        public Note GetById(int id)
         {
             return Notes.Find(note => note.Id == id);
         }

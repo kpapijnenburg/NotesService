@@ -16,7 +16,7 @@ namespace notes_service.Controllers
         [HttpGet("/notes/{id}")]
         public IActionResult GetById(int id)
         {
-            var note = service.Get(id);
+            var note = service.GetById(id);
 
             if (note == null)
             {
