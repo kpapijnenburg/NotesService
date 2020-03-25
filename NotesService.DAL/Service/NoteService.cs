@@ -43,9 +43,22 @@ namespace NotesService.DAL.Service
                 .ToList();
         }
 
-        public bool Update(int id, Note note)
+        public bool Update(int id, Note toUpdate)
         {
-            throw new NotImplementedException();
+            var fromDb = context.Notes.FirstOrDefault(note => note.Id == id);
+
+            if(fromDb == null)
+            {
+                context.Add(toUpdate);
+                context.SaveChanges();
+                return false;
+            } 
+
+            fromDb.Title = toUpdate.Title;
+            fromDb.HandwrittenText = toUpdate.HandwrittenText;
+
+            context.SaveChanges();
+            return true;
         }
     }
 }

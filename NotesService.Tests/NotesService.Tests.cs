@@ -131,5 +131,33 @@ namespace NotesService.Tests
                 Assert.IsInstanceOf<Note>(noteFromDb);
             }
         }
+
+        [TestCase("Update_EntityDoesNotExist_ReturnsTrueAndCreatesEntity")]
+        public void Update_EntityDoesNotExist_ReturnsTrueAndCreatesEntity(string DbName)
+        {
+            // Arrange 
+            var options = Initialize(DbName);
+            var id = 1;
+            var note = new Note() { Title = "Test Note" };
+
+            // Act
+            using (var context = new NotesContext(options))
+            {
+                var service = new NoteService(context);
+                var result = service.Update(1, note);
+
+                // Assert
+                Assert.False(result);
+            }
+
+            using (var context = new NotesContext(options))
+            {
+                var service = new NoteService(context);
+                var fromDb = service.GetById(id);
+
+                // Assert
+                Assert.NotNull(fromDb);
+            }
+        }
     }
 }
