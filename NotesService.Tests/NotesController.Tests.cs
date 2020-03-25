@@ -18,18 +18,5 @@ namespace NotesService.Tests
             contextMock = new Mock<INotesService>();
             controller = new NotesController(contextMock.Object);
         }
-
-        [Test]
-        public void Get_NoteWithGivenIdExists_Returns200OK()
-        {
-            var note = new Note();
-
-            contextMock.Setup(c => c.Get(It.IsAny<int>())).Returns(note);
-
-            var result = controller.GetById(1);
-            var anus = result as OkObjectResult;
-
-            Assert.AreEqual(note, result);
-        }
     }
 }

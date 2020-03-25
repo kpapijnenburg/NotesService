@@ -2,18 +2,33 @@
 using NotesService.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NotesService.IntegrationTests
 {
     public class DummyNotesContext : INotesService
     {
-        private List<Note> Notes;
+        private readonly List<Note> Notes;
 
         public DummyNotesContext()
         {
             this.Notes = new List<Note>()
             {
-                new Note(1, "Test notitie", null, DateTime.Now)
+                new Note() {
+                    Id = 1,
+                    Title = "Test Notitie",
+                    Content = "",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    HandwrittenText = new HandwrittenText()
+                    {
+                        Id = 1,
+                        CreatedAt = DateTime.Now,
+                        UpdatedAt = DateTime.Now,
+                        State = State.Pending,
+                        Image = new byte[8]
+                    }
+                }
             };
         }
 
@@ -30,7 +45,7 @@ namespace NotesService.IntegrationTests
 
         public Note Get(int id)
         {
-            return Notes.Find(note => note.Id == id);
+            return Notes.FirstOrDefault(note => note.Id == id);
         }
 
         public IEnumerable<Note> GetAll()
