@@ -5,12 +5,17 @@ using Xunit;
 using System.Net.Mime;
 using System.Net;
 using System.Net.Http;
+using NotesService.Domain.Models;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace NotesService.IntegrationTests
 {
     public class NotesControllerTests : IClassFixture<NotesServiceFactory>
     {
         private readonly HttpClient client;
+        private Note DefaultNote { get; set; }
 
         public NotesServiceFactory Factory { get; }
 
@@ -18,6 +23,21 @@ namespace NotesService.IntegrationTests
         {
             this.Factory = factory;
             this.client = factory.CreateClient();
+
+            this.DefaultNote = new Note()
+            {
+                Title = "Test Note",
+                Content = "",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                HandwrittenText = new HandwrittenText()
+                {
+                    Image = new byte[8],
+                    State = State.Pending,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                }
+            };
         }
 
         [Fact]
@@ -48,6 +68,49 @@ namespace NotesService.IntegrationTests
         public async Task GetById_NoteDoesExist_ReturnsOK()
         {
             var response = await client.GetAsync("/notes/1");
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Create_NoteHaseBeenCreated_ReturnsOK()
+        {
+            // Arrange
+            string json = JsonConvert.SerializeObject(DefaultNote);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Act
+            var response = await client.PostAsync("/notes", content);
+
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Create_NoteCannotBeDeserialized_ReturnsBadRequest()
+        {
+            // Arrange
+            var note = "BadRequest";
+
+            string json = JsonConvert.SerializeObject(note);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync("/notes", content);
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Update_NoteExists_ReturnsOK()
+        {
+            // Arrange
+            DefaultNote.Id = 1;
+            string json = JsonConvert.SerializeObject(DefaultNote);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            // Act
+            var response = await client.PutAsync("/notes/1", content);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }

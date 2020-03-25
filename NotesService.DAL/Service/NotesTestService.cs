@@ -38,7 +38,7 @@ namespace NotesService.DAL.Service
             return Notes;
         }
 
-        public bool Update(Note note)
+        public bool Update(int id, Note note)
         {
             return Notes.Find(toFind => toFind.Id == note.Id) != null;
 

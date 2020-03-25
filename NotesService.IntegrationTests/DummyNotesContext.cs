@@ -53,10 +53,14 @@ namespace NotesService.IntegrationTests
             return Notes;
         }
 
-        public bool Update(Note note)
+        public bool Update(int id, Note toUpdate)
         {
-            return Notes.Find(toFind => toFind.Id == note.Id) != null;
-
+            if (!Notes.Exists(toFind => toFind.Id == id))
+            {
+                Notes.Add(toUpdate);
+                return false;
+            }
+            return true;
         }
     }
 }

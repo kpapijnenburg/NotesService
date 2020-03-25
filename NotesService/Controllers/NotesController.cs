@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using NotesService.DAL.Service;
+using NotesService.Domain.Models;
 
 namespace notes_service.Controllers
 {
@@ -12,6 +13,13 @@ namespace notes_service.Controllers
         {
             this.service = service;
         }
+
+        [HttpPost("/notes")]
+        public IActionResult Create(Note note)
+        {
+            return Ok(service.Add(note));
+        }
+
 
         [HttpGet("/notes/{id}")]
         public IActionResult GetById(int id)
@@ -30,6 +38,12 @@ namespace notes_service.Controllers
         public IActionResult GetAll()
         {
             return Ok(service.GetAll());
+        }
+
+        [HttpPut("/notes/{id}")]
+        public IActionResult Update (Note note)
+        {
+            return Ok(service.Update(1, note));
         }
     }
 }

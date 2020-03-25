@@ -43,7 +43,7 @@ namespace NotesService.DAL.Service
                 .ToList();
         }
 
-        public bool Update(Note note)
+        public bool Update(int id, Note note)
         {
             throw new NotImplementedException();
         }

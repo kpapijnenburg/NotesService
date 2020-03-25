@@ -8,7 +8,7 @@ namespace NotesService.DAL.Service
         Note GetById(int id);
         IEnumerable<Note> GetAll();
         Note Add(Note note);
-        bool Update(Note note);
+        bool Update(int id, Note note);
         bool Delete(Note note);
 
     }
