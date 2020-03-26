@@ -23,9 +23,17 @@ namespace NotesService.DAL.Service
             return note;
         }
 
-        public bool Delete(Note note)
+        public bool Delete(int id)
         {
-            return Notes.Remove(note);
+            var note = Notes.Find(note => note.Id == id);
+
+            if (note == null)
+            {
+                return false;
+            }
+
+            Notes.Remove(note);
+            return true;
         }
 
         public Note GetById(int id)
@@ -41,7 +49,6 @@ namespace NotesService.DAL.Service
         public bool Update(int id, Note note)
         {
             return Notes.Find(toFind => toFind.Id == note.Id) != null;
-
         }
     }
 }

@@ -23,7 +23,7 @@ namespace NotesService.DAL.Service
             return entry.Entity;
         }
 
-        public bool Delete(Note note)
+        public bool Delete(int id)
         {
             throw new NotImplementedException();            
         }

@@ -112,7 +112,34 @@ namespace NotesService.IntegrationTests
             // Act
             var response = await client.PutAsync("/notes/1", content);
 
+            // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Delete_NoteDoesNotExist_ReturnsNotFound()
+        {
+            // Arrange
+            int noteId = 2;
+
+            // Act
+            var response = await client.DeleteAsync($"/notes/{noteId}");
+
+            // Assert
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Delete_NoteDoesExist_ReturnsNoContent()
+        {
+            // Arrange
+            int noteId = 1;
+
+            // Act
+            var response = await client.DeleteAsync($"/notes/{noteId}");
+
+            // Assert
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
     }
 }

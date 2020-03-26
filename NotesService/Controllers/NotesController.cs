@@ -41,9 +41,21 @@ namespace notes_service.Controllers
         }
 
         [HttpPut("/notes/{id}")]
-        public IActionResult Update (Note note)
+        public IActionResult Update(Note note)
         {
             return Ok(service.Update(1, note));
+        }
+
+        [HttpDelete("/notes/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var deleted = service.Delete(id);
+
+            if (!deleted)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }

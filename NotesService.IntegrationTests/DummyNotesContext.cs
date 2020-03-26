@@ -38,9 +38,17 @@ namespace NotesService.IntegrationTests
             return note;
         }
 
-        public bool Delete(Note note)
+        public bool Delete(int id)
         {
-            return Notes.Remove(note);
+            var note = Notes.FirstOrDefault(note => note.Id == id);
+
+            if (note == null)
+            {
+                return false;
+            }
+
+            Notes.Remove(note);
+            return true;
         }
 
         public Note GetById(int id)
