@@ -12,7 +12,8 @@ namespace NotesService.DAL.Configurations
             builder
                 .HasOne(n => n.HandwrittenText)
                 .WithOne(h => h.Note)
-                .HasForeignKey<HandwrittenText>(h => h.NoteId);
+                .HasForeignKey<HandwrittenText>(h => h.NoteId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder
                 .HasData(
