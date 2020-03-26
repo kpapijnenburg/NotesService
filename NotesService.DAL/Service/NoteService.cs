@@ -25,12 +25,20 @@ namespace NotesService.DAL.Service
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();            
+            var note = context.Notes
+                .FirstOrDefault(note => note.Id == id);
+
+            if (note == null) return false;
+
+            context.Remove(note);
+            context.SaveChanges();
+
+            return true;
         }
 
         public Note GetById(int id)
         {
-            var note =  context.Notes
+            var note = context.Notes
                 .Include(n => n.HandwrittenText)
                 .FirstOrDefault(n => n.Id == id);
             return note;
@@ -47,12 +55,12 @@ namespace NotesService.DAL.Service
         {
             var fromDb = context.Notes.FirstOrDefault(note => note.Id == id);
 
-            if(fromDb == null)
+            if (fromDb == null)
             {
                 context.Add(toUpdate);
                 context.SaveChanges();
                 return false;
-            } 
+            }
 
             fromDb.Title = toUpdate.Title;
             fromDb.HandwrittenText = toUpdate.HandwrittenText;

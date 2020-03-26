@@ -47,7 +47,6 @@ namespace NotesService.IntegrationTests
                 return false;
             }
 
-            Notes.Remove(note);
             return true;
         }
 

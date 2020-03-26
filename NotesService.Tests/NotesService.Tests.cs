@@ -159,5 +159,47 @@ namespace NotesService.Tests
                 Assert.NotNull(fromDb);
             }
         }
+
+        [TestCase("Delete_EntityDoesNotExist_ReturnsFalse")]
+        public void Delete_EntityDoesNotExist_ReturnsFalse(string dbName)
+        {
+            // Arrange
+            var options = Initialize(dbName);
+            int noteId = 1;
+
+            using var context = new NotesContext(options); 
+            var service = new NoteService(context);
+
+            // Act
+            var result = service.Delete(noteId);
+
+            // Assert
+            Assert.False(result);
+        }
+
+        [TestCase("Delete_EntityDoesExist_ReturnsTrue")]
+        public void Delete_EntityDoesExist_ReturnsTrue(string DbName)
+        {
+            // Arrange
+            var options = Initialize(DbName);
+            var note = new Note() { Title = "Test Note" };
+            
+            using (var context = new NotesContext(options))
+            {
+                var service = new NoteService(context);
+                note = service.Add(note);
+            }
+
+            // Act
+            using (var context = new NotesContext(options))
+            {
+                var service = new NoteService(context);
+                var result = service.Delete(note.Id);
+
+                // Assert
+                Assert.True(result);
+            }
+
+        }
     }
 }
