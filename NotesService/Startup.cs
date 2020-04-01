@@ -29,11 +29,6 @@ namespace NotesService
                 options.SerializerSettings
                 .ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
-            if (Environment.IsEnvironment("Testing"))
-            {
-                return;
-            }
-
             // TODO: Verplaats naar enviroment variable
             var connection = @"Server=notes-db;Database=master;User=sa;Password=P4ssword!;";
 

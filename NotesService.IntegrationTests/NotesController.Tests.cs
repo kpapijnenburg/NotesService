@@ -19,10 +19,10 @@ namespace NotesService.IntegrationTests
 
         public NotesServiceFactory Factory { get; }
 
-        public NotesControllerTests(NotesServiceFactory factory)
+        public NotesControllerTests()
         {
-            this.Factory = factory;
-            this.client = factory.CreateClient();
+            this.Factory =  new NotesServiceFactory();
+            this.client = Factory.CreateClient();
 
             this.DefaultNote = new Note()
             {
