@@ -8,6 +8,8 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["NotesService/NotesService.csproj", "NotesService/"]
+COPY ["NotesService.DAL/NotesService.DAL.csproj", "NotesService.DAL/"]
+COPY ["NotesService.Domain/NotesService.Domain.csproj", "NotesService.Domain/"]
 RUN dotnet restore "NotesService/NotesService.csproj"
 COPY . .
 WORKDIR "/src/NotesService"

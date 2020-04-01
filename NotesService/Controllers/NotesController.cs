@@ -1,25 +1,61 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using notes_service.Context;
-using notes_service.Models;
-
+using NotesService.DAL.Service;
+using NotesService.Domain.Models;
 
 namespace notes_service.Controllers
 {
     [ApiController]
     public class NotesController : ControllerBase
     {
-        private INotesContext context;
+        private readonly INotesService service;
 
-        public NotesController()
+        public NotesController(INotesService service)
         {
-            context = new NotesTestContext();
+            this.service = service;
         }
 
-        [HttpGet("/notes/{id}")]
-        public Note Get(int id)
+        [HttpPost("/notes")]
+        public IActionResult Create(Note note)
         {
-            return context.Get(id);
+            return Ok(service.Add(note));
+        }
+
+
+        [HttpGet("/notes/{id}")]
+        public IActionResult GetById(int id)
+        {
+            var note = service.GetById(id);
+
+            if (note == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(note);
+        }
+
+        [HttpGet("/notes")]
+        public IActionResult GetAll()
+        {
+            return Ok(service.GetAll());
+        }
+
+        [HttpPut("/notes/{id}")]
+        public IActionResult Update(Note note)
+        {
+            return Ok(service.Update(1, note));
+        }
+
+        [HttpDelete("/notes/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var deleted = service.Delete(id);
+
+            if (!deleted)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }
