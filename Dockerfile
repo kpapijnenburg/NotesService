@@ -15,6 +15,9 @@ COPY . .
 WORKDIR "/src/NotesService"
 RUN dotnet build "NotesService.csproj" -c Release -o /app/build
 
+RUN chmod +x ../entrypoint.sh
+CMD /bin/bash ./entrypoint.sh
+
 FROM build AS publish
 RUN dotnet publish "NotesService.csproj" -c Release -o /app/publish
 

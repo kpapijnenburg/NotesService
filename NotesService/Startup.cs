@@ -34,19 +34,27 @@ namespace NotesService
                 return;
             }
 
+            // TODO: Verplaats naar enviroment variable
+            var connection = @"Server=notes-db;Database=master;User=sa;Password=P4ssword!;";
+
             services.AddDbContext<NotesContext>
                 (options => options
-                .UseSqlServer(Configuration.GetConnectionString("NotesContext")));
+                .UseSqlServer(connection));
 
-            services.AddTransient<INotesService, NotesTestService>();
+            services.AddTransient<INotesService, NoteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, NotesContext context)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+
+            if (env.IsDevelopment() || env.IsProduction())
+            {
+                context.Database.Migrate();
             }
 
             app.UseHttpsRedirection();
