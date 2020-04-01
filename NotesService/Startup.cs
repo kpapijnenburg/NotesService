@@ -29,11 +29,16 @@ namespace NotesService
                 options.SerializerSettings
                 .ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
+            if (Environment.IsEnvironment("Testing"))
+            {
+                return;
+            }
+
             services.AddDbContext<NotesContext>
                 (options => options
                 .UseSqlServer(Configuration.GetConnectionString("NotesContext")));
 
-            services.AddTransient<INotesService, NoteService>();
+            services.AddTransient<INotesService, NotesTestService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
