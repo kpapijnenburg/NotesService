@@ -14,14 +14,14 @@ namespace notes_service.Controllers
             this.service = service;
         }
 
-        [HttpPost("/notes")]
+        [HttpPost("/api/notes")]
         public IActionResult Create(Note note)
         {
             return Ok(service.Add(note));
         }
 
 
-        [HttpGet("/notes/{id}")]
+        [HttpGet("/api/notes/{id}")]
         public IActionResult GetById(int id)
         {
             var note = service.GetById(id);
@@ -34,19 +34,19 @@ namespace notes_service.Controllers
             return Ok(note);
         }
 
-        [HttpGet("/notes")]
+        [HttpGet("/api/notes")]
         public IActionResult GetAll()
         {
             return Ok(service.GetAll());
         }
 
-        [HttpPut("/notes/{id}")]
+        [HttpPut("/api/notes/{id}")]
         public IActionResult Update(Note note)
         {
             return Ok(service.Update(1, note));
         }
 
-        [HttpDelete("/notes/{id}")]
+        [HttpDelete("/api/notes/{id}")]
         public IActionResult Delete(int id)
         {
             var deleted = service.Delete(id);
