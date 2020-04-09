@@ -14,7 +14,8 @@
       "launchBrowser": true,
       "launchUrl": "weatherforecast",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "NotesContext": "Data Source=.\\SQLEXPRESS;Initial Catalog=NotesDB;Integrated Security=True; MultipleActiveResultSets=true"
       }
     },
     "NotesService": {
