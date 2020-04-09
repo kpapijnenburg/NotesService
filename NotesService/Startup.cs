@@ -31,7 +31,7 @@ namespace NotesService
 
             // TODO: Verplaats naar enviroment variable
             var connection = @"Server=notes-db;Database=master;User=sa;Password=P4ssword!;";
-
+                       
             services.AddDbContext<NotesContext>
                 (options => options
                 .UseSqlServer(connection));
@@ -47,6 +47,7 @@ namespace NotesService
                 app.UseDeveloperExceptionPage();
             }
 
+            // Kan onverwachte resultaten opleveren.
             if (env.IsDevelopment() || env.IsProduction())
             {
                 context.Database.Migrate();
