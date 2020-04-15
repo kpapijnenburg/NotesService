@@ -32,8 +32,6 @@ namespace NotesService.IntegrationTests
                 UpdatedAt = DateTime.Now,
                 HandwrittenText = new HandwrittenText()
                 {
-                    Image = new byte[8],
-                    State = State.Pending,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
                 }

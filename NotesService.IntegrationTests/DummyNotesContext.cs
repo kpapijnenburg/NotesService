@@ -25,8 +25,6 @@ namespace NotesService.IntegrationTests
                         Id = 1,
                         CreatedAt = DateTime.Now,
                         UpdatedAt = DateTime.Now,
-                        State = State.Pending,
-                        Image = new byte[8]
                     }
                 }
             };

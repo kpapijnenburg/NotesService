@@ -29,7 +29,7 @@ namespace NotesService.Tests
             using (var context = new NotesContext(options))
             {
                 var service = new NoteService(context);
-                noteId = service.Add(new Note() { Title = "Test note", HandwrittenText = new HandwrittenText() { Image = new byte[8] } }).Id;
+                noteId = service.Add(new Note() { Title = "Test note", HandwrittenText = new HandwrittenText() }).Id;
             }
 
             // Assert
@@ -43,29 +43,6 @@ namespace NotesService.Tests
             }
         }
 
-        [TestCase("Create_WritesToDB_HandwrittenTextStateIsPending")]
-        public void Create_WritesToDB_HandwrittenTextStateIsPending(string DbName)
-        {
-            // Arrange
-            var options = Initialize(DbName);
-            int noteId = 0;
-            // Act
-            using (var context = new NotesContext(options))
-            {
-                var service = new NoteService(context);
-                noteId = service.Add(new Note() { Title = "Test note", HandwrittenText = new HandwrittenText() { Image = new byte[8] } }).Id;
-            }
-
-            // Assert
-            using (var context = new NotesContext(options))
-            {
-                var service = new NoteService(context);
-                var note = service.GetById(noteId);
-
-                Assert.AreEqual(State.Pending, note.HandwrittenText.State);
-            }
-        }
-
         [TestCase("GetAll_HasEntries_ReturnsListOfNotes")]
         public void GetAll_HasEntries_ReturnsListOfNotes(string DbName)
         {
@@ -75,7 +52,7 @@ namespace NotesService.Tests
             using (var context = new NotesContext(options))
             {
                 var service = new NoteService(context);
-                service.Add(new Note() { Title = "Test note", HandwrittenText = new HandwrittenText() { Image = new byte[8] } });
+                service.Add(new Note() { Title = "Test note", HandwrittenText = new HandwrittenText() });
             }
 
             // Act
@@ -167,7 +144,7 @@ namespace NotesService.Tests
             var options = Initialize(dbName);
             int noteId = 1;
 
-            using var context = new NotesContext(options); 
+            using var context = new NotesContext(options);
             var service = new NoteService(context);
 
             // Act
@@ -183,7 +160,7 @@ namespace NotesService.Tests
             // Arrange
             var options = Initialize(DbName);
             var note = new Note() { Title = "Test Note" };
-            
+
             using (var context = new NotesContext(options))
             {
                 var service = new NoteService(context);

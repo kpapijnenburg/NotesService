@@ -38,12 +38,6 @@ namespace NotesService.DAL
                 if (entry.State == EntityState.Added)
                 {
                     ((BaseEntity)entry.Entity).CreatedAt = DateTime.Now;
-
-                    // If handwritten text is added the State should be set to Pending.
-                    if (entry.Entity.GetType() == typeof(HandwrittenText))
-                    {
-                        ((HandwrittenText)entry.Entity).State = State.Pending;
-                    }
                 }
             }
 
