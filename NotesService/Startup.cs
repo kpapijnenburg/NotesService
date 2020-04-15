@@ -30,7 +30,7 @@ namespace NotesService
                 .ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             // TODO: Verplaats naar enviroment variable
-            var connection = @"Server=notes-db;Database=master;User=sa;Password=P4ssword!;";
+            var connection = @"Server=notes-db;Database=NotesDB;User=sa;Password=P4ssword!;";
                        
             services.AddDbContext<NotesContext>
                 (options => options
