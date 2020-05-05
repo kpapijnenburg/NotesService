@@ -29,7 +29,7 @@ namespace NotesService.Tests
             using (var context = new NotesContext(options))
             {
                 var service = new NoteService(context);
-                noteId = service.Add(new Note() { Title = "Test note", HandwrittenText = new HandwrittenText() }).Id;
+                noteId = service.Add(new Note() { Title = "Test note"}).Id;
             }
 
             // Assert
@@ -52,7 +52,7 @@ namespace NotesService.Tests
             using (var context = new NotesContext(options))
             {
                 var service = new NoteService(context);
-                service.Add(new Note() { Title = "Test note", HandwrittenText = new HandwrittenText() });
+                service.Add(new Note() { Title = "Test note" });
             }
 
             // Act

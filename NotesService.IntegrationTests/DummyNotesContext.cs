@@ -17,15 +17,8 @@ namespace NotesService.IntegrationTests
                 new Note() {
                     Id = 1,
                     Title = "Test Notitie",
-                    Content = "",
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
-                    HandwrittenText = new HandwrittenText()
-                    {
-                        Id = 1,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                    }
                 }
             };
         }

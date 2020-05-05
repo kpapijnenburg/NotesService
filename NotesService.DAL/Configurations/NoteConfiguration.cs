@@ -9,24 +9,7 @@ namespace NotesService.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<Note> builder)
         {
-            builder
-                .HasOne(n => n.HandwrittenText)
-                .WithOne(h => h.Note)
-                .HasForeignKey<HandwrittenText>(h => h.NoteId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder
-                .HasData(
-                    new Note()
-                    {
-                        Id = 1,
-                        Title = "Test Title",
-                        Content = "Test Content",
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                        HandwrittenTextId = 1
-                    }
-                );
+            builder.HasData(new Note() { Id = 1, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now, ImageData = new byte[0] });
         }
     }
 }

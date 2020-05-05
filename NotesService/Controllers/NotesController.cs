@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NotesService.DAL.Service;
 using NotesService.Domain.Models;
 using NotesService.Messaging.Messages;
+using System.Threading.Tasks;
 
 namespace notes_service.Controllers
 {
@@ -19,12 +20,15 @@ namespace notes_service.Controllers
         }
 
         [HttpPost("/api/notes")]
-        public IActionResult Create(Note note)
+        public async Task<IActionResult> Create(Note note)
         {
             var created = service.Add(note);
 
             var message = new NoteCreatedMessage(created);
-            
+
+            await messageProducer.SendAsync(message, "notes.created");
+
+            return Created($"/api/notes/{created.Id}", created);
         }
 
 

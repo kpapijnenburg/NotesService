@@ -10,8 +10,6 @@ namespace NotesService.DAL
     public class NotesContext : DbContext
     {
         public DbSet<Note> Notes { get; set; }
-        public DbSet<HandwrittenText> HandwrittenTexts { get; set; }
-
         public NotesContext(DbContextOptions options) : base(options)
         {
         }
@@ -19,8 +17,6 @@ namespace NotesService.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new NoteConfiguration());
-            modelBuilder.ApplyConfiguration(new HandwrittenTextConfiguration());
-
             base.OnModelCreating(modelBuilder);
         }
 

@@ -13,7 +13,7 @@ namespace NotesService.DAL.Service
         {
             this.Notes = new List<Note>()
             {
-                new Note() {Id = 1, Title = "Test notitie", Content = "Test Content", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now}
+                new Note() {Id = 1, Title = "Test notitie", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now}
             };
         }
 

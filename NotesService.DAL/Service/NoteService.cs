@@ -39,7 +39,6 @@ namespace NotesService.DAL.Service
         public Note GetById(int id)
         {
             var note = context.Notes
-                .Include(n => n.HandwrittenText)
                 .FirstOrDefault(n => n.Id == id);
             return note;
         }
@@ -47,7 +46,6 @@ namespace NotesService.DAL.Service
         public IEnumerable<Note> GetAll()
         {
             return context.Notes
-                .Include(n => n.HandwrittenText)
                 .ToList();
         }
 
@@ -63,7 +61,6 @@ namespace NotesService.DAL.Service
             }
 
             fromDb.Title = toUpdate.Title;
-            fromDb.HandwrittenText = toUpdate.HandwrittenText;
 
             context.SaveChanges();
             return true;

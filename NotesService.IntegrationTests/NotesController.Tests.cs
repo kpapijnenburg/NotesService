@@ -26,14 +26,8 @@ namespace NotesService.IntegrationTests
             this.DefaultNote = new Note()
             {
                 Title = "Test Note",
-                Content = "",
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
-                HandwrittenText = new HandwrittenText()
-                {
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now,
-                }
             };
         }
 

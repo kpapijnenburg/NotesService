@@ -11,7 +11,6 @@ namespace NotesService.Messaging.Messages
        public NoteCreatedMessage(Note note)
         {
             NoteId = note.Id;
-            Image = note.HandwrittenText.Image;
         }
 
         public int NoteId { get; set; }
