@@ -25,16 +25,13 @@ namespace NotesService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
-                .AddNewtonsoftJson(options => 
+                .AddNewtonsoftJson(options =>
                 options.SerializerSettings
                 .ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
-            // TODO: Verplaats naar enviroment variable
-            var connection = @"Server=notes-db;Database=NotesDB;User=sa;Password=P4ssword!;";
-                       
             services.AddDbContext<NotesContext>
                 (options => options
-                .UseSqlServer(connection));
+                .UseSqlServer(Configuration.GetConnectionString("NotesContext")));
 
             services.AddTransient<INotesService, NoteService>();
         }

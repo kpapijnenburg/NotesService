@@ -16,7 +16,6 @@ namespace NotesService.IntegrationTests
     {
         private readonly HttpClient client;
         private Note DefaultNote { get; set; }
-
         public NotesServiceFactory Factory { get; }
 
         public NotesControllerTests()
