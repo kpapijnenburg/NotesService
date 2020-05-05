@@ -1,6 +1,8 @@
+using BIED.Messaging.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using NotesService.DAL.Service;
 using NotesService.Domain.Models;
+using NotesService.Messaging.Messages;
 
 namespace notes_service.Controllers
 {
@@ -8,16 +10,21 @@ namespace notes_service.Controllers
     public class NotesController : ControllerBase
     {
         private readonly INotesService service;
+        private readonly IMessageProducer messageProducer;
 
-        public NotesController(INotesService service)
+        public NotesController(INotesService service, IMessageProducer messageProducer)
         {
             this.service = service;
+            this.messageProducer = messageProducer;
         }
 
         [HttpPost("/api/notes")]
         public IActionResult Create(Note note)
         {
-            return Ok(service.Add(note));
+            var created = service.Add(note);
+
+            var message = new NoteCreatedMessage(created);
+            
         }
 
 

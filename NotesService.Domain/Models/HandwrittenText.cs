@@ -5,6 +5,9 @@ namespace NotesService.Domain.Models
     public class HandwrittenText: BaseEntity
     {
         public int NoteId { get; set; }
+
+        public byte[] Image { get; set; }
+
         public Note Note { get; set; }
     }
 }

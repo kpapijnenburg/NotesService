@@ -7,6 +7,8 @@ using NotesService.DAL.Service;
 using NotesService.DAL;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using BIED.Messaging.Config;
+using BIED.Messaging.Extensions;
 
 namespace NotesService
 {
@@ -34,6 +36,10 @@ namespace NotesService
                 .UseSqlServer(Configuration.GetConnectionString("NotesContext")));
 
             services.AddTransient<INotesService, NoteService>();
+
+            services.Configure<RabbitMqConfig>(Configuration.GetSection("RabbitMq"));
+            services.AddRabbitMq();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
