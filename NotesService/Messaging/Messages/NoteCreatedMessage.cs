@@ -11,6 +11,7 @@ namespace NotesService.Messaging.Messages
        public NoteCreatedMessage(Note note)
         {
             NoteId = note.Id;
+            Image = note.ImageData;
         }
 
         public int NoteId { get; set; }
