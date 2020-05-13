@@ -31,6 +31,11 @@ namespace NotesService
                 options.SerializerSettings
                 .ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
+            services.AddCors(options => 
+            {
+                options.AddPolicy(name: "AllowLocalHost", builder => builder.WithOrigins("http://localhost:8080").AllowAnyHeader().AllowAnyMethod());
+            });
+
             services.AddDbContext<NotesContext>
                 (options => options
                 .UseSqlServer(Configuration.GetConnectionString("NotesContext")));
@@ -59,6 +64,8 @@ namespace NotesService
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllowLocalHost");
 
             app.UseAuthorization();
 
