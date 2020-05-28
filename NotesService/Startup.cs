@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using BIED.Messaging.Config;
 using BIED.Messaging.Extensions;
+using System;
 
 namespace NotesService
 {
@@ -31,14 +32,14 @@ namespace NotesService
                 options.SerializerSettings
                 .ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
-            services.AddCors(options => 
+            services.AddCors(options =>
             {
-                options.AddPolicy(name: "AllowLocalHost", builder => builder.WithOrigins("http://localhost:8080").AllowAnyHeader().AllowAnyMethod());
+                options.AddPolicy(name: "AllowLocalHost", builder => builder.WithOrigins("http://localhost:8080", "http://127.0.0.1:8080").AllowAnyHeader().AllowAnyMethod());
             });
 
             services.AddDbContext<NotesContext>
                 (options => options
-                .UseSqlServer(Configuration.GetConnectionString("NotesContext")));
+                    .UseSqlServer(Configuration.GetConnectionString("NotesContext")));
 
             services.AddTransient<INotesService, NoteService>();
 
