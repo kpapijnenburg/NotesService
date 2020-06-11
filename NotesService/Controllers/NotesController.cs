@@ -1,4 +1,5 @@
 using BIED.Messaging.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NotesService.DAL.Service;
 using NotesService.Domain.Models;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace notes_service.Controllers
 {
+    [Authorize]
     [ApiController]
     public class NotesController : ControllerBase
     {
@@ -54,7 +56,7 @@ namespace notes_service.Controllers
         [HttpPut("/api/notes/{id}")]
         public IActionResult Update(Note note)
         {
-            return Ok(service.Update(1, note));
+            return Ok(service.Update(note.Id, note));
         }
 
         [HttpDelete("/api/notes/{id}")]

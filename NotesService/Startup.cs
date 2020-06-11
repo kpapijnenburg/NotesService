@@ -10,6 +10,11 @@ using Newtonsoft.Json;
 using BIED.Messaging.Config;
 using BIED.Messaging.Extensions;
 using System;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using BIED.Messaging.Abstractions;
+using NotesService.Messaging;
 
 namespace NotesService
 {
@@ -37,15 +42,44 @@ namespace NotesService
                 options.AddPolicy(name: "AllowLocalHost", builder => builder.WithOrigins("http://localhost:8080", "http://127.0.0.1:8080").AllowAnyHeader().AllowAnyMethod());
             });
 
-            services.AddDbContext<NotesContext>
-                (options => options
-                    .UseSqlServer(Configuration.GetConnectionString("NotesContext")));
+            if (Environment.IsProduction())
+            {
+                services.AddDbContext<NotesContext>
+                    (options => options
+                        .UseSqlServer(Configuration.GetConnectionString("NotesContext")));
 
-            services.AddTransient<INotesService, NoteService>();
+                services.AddTransient<INotesService, NoteService>();
 
-            services.Configure<RabbitMqConfig>(Configuration.GetSection("RabbitMq"));
-            services.AddRabbitMq();
+                services.Configure<RabbitMqConfig>(Configuration.GetSection("RabbitMq"));
+                services.AddRabbitMq();
+            }
 
+            if (Environment.IsDevelopment())
+            {
+                services.AddDbContext<NotesContext>(options =>
+                        options.UseInMemoryDatabase("InMemDB")
+                    );
+
+                services.AddTransient<INotesService, NotesTestService>();
+
+                services.AddTransient<IMessageProducer, DummyMessageProducer>();
+            }
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                    };
+
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +91,7 @@ namespace NotesService
             }
 
             // Kan onverwachte resultaten opleveren.
-            if (env.IsDevelopment() || env.IsProduction())
+            if (env.IsProduction())
             {
                 context.Database.Migrate();
             }
@@ -68,6 +102,7 @@ namespace NotesService
 
             app.UseCors("AllowLocalHost");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
