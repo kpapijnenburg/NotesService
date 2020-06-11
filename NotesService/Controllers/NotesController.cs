@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NotesService.DAL.Service;
 using NotesService.Domain.Models;
 using NotesService.Messaging.Messages;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace notes_service.Controllers
@@ -50,7 +51,7 @@ namespace notes_service.Controllers
         [HttpGet("/api/notes")]
         public IActionResult GetAll()
         {
-            return Ok(service.GetAll());
+            return Ok(service.GetAll(User.FindFirst("id").Value));
         }
 
         [HttpPut("/api/notes/{id}")]

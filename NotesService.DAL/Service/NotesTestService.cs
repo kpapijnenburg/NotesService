@@ -41,7 +41,7 @@ namespace NotesService.DAL.Service
             return Notes.Find(note => note.Id == id);
         }
 
-        public IEnumerable<Note> GetAll()
+        public IEnumerable<Note> GetAll(string userId)
         {
             return Notes;
         }

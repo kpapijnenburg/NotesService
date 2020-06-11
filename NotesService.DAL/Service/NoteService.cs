@@ -43,9 +43,10 @@ namespace NotesService.DAL.Service
             return note;
         }
 
-        public IEnumerable<Note> GetAll()
+        public IEnumerable<Note> GetAll(string userId)
         {
             return context.Notes
+                .Where(n => n.UserId.ToString() == userId)
                 .ToList();
         }
 
