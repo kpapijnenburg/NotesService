@@ -7,5 +7,7 @@ namespace NotesService.Domain.Models
     {
         public string Title { get; set; }
         public byte[] ImageData { get; set; }
+        public User User { get; set; }
+        public Guid UserId { get; set; }
     }
 }

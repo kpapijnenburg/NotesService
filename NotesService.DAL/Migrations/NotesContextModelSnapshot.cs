@@ -15,7 +15,7 @@ namespace NotesService.DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2")
+                .HasAnnotation("ProductVersion", "3.1.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -38,7 +38,12 @@ namespace NotesService.DAL.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Notes");
 
@@ -46,10 +51,38 @@ namespace NotesService.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2020, 5, 6, 8, 46, 54, 921, DateTimeKind.Local).AddTicks(8343),
+                            CreatedAt = new DateTime(2020, 6, 11, 11, 16, 56, 34, DateTimeKind.Local).AddTicks(4852),
                             ImageData = new byte[] {  },
-                            UpdatedAt = new DateTime(2020, 5, 6, 8, 46, 54, 924, DateTimeKind.Local).AddTicks(7562)
+                            Title = "Test Notitie",
+                            UpdatedAt = new DateTime(2020, 6, 11, 11, 16, 56, 38, DateTimeKind.Local).AddTicks(117),
+                            UserId = new Guid("845f9dec-2c0e-4e96-97ef-a0bbb48c3a25")
                         });
+                });
+
+            modelBuilder.Entity("NotesService.Domain.Models.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("845f9dec-2c0e-4e96-97ef-a0bbb48c3a25")
+                        });
+                });
+
+            modelBuilder.Entity("NotesService.Domain.Models.Note", b =>
+                {
+                    b.HasOne("NotesService.Domain.Models.User", "User")
+                        .WithMany("Notes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

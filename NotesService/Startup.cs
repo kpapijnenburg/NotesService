@@ -42,28 +42,23 @@ namespace NotesService
                 options.AddPolicy(name: "AllowLocalHost", builder => builder.WithOrigins("http://localhost:8080", "http://127.0.0.1:8080").AllowAnyHeader().AllowAnyMethod());
             });
 
-            if (Environment.IsProduction())
-            {
-                services.AddDbContext<NotesContext>
-                    (options => options
-                        .UseSqlServer(Configuration.GetConnectionString("NotesContext")));
+            //if (Environment.IsProduction())
+            //{
+            //    services.AddDbContext<NotesContext>
+            //        (options => options
+            //            .UseSqlServer(Configuration.GetConnectionString("NotesContext")));
 
-                services.AddTransient<INotesService, NoteService>();
+            //    services.AddTransient<INotesService, NoteService>();
 
-                services.Configure<RabbitMqConfig>(Configuration.GetSection("RabbitMq"));
-                services.AddRabbitMq();
-            }
+            //    services.Configure<RabbitMqConfig>(Configuration.GetSection("RabbitMq"));
+            //    services.AddRabbitMq();
+            //}
 
-            if (Environment.IsDevelopment())
-            {
-                services.AddDbContext<NotesContext>(options =>
-                        options.UseInMemoryDatabase("InMemDB")
-                    );
+            services.AddDbContext<NotesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalDB")));
 
-                services.AddTransient<INotesService, NotesTestService>();
+            services.AddTransient<INotesService, NoteService>();
 
-                services.AddTransient<IMessageProducer, DummyMessageProducer>();
-            }
+            services.AddTransient<IMessageProducer, DummyMessageProducer>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

@@ -17,6 +17,7 @@ namespace NotesService.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new NoteConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 
