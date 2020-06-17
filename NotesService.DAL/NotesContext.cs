@@ -30,11 +30,14 @@ namespace NotesService.DAL
 
             foreach (var entry in entries)
             {
-                ((BaseEntity)entry.Entity).UpdatedAt = DateTime.Now;
-
-                if (entry.State == EntityState.Added)
+                if (entry.Entity is BaseEntity)
                 {
-                    ((BaseEntity)entry.Entity).CreatedAt = DateTime.Now;
+                    ((BaseEntity)entry.Entity).UpdatedAt = DateTime.Now;
+
+                    if (entry.State == EntityState.Added)
+                    {
+                        ((BaseEntity)entry.Entity).CreatedAt = DateTime.Now;
+                    }
                 }
             }
 

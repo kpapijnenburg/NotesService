@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace notes_service.Controllers
 {
-    [Authorize]
     [ApiController]
     public class NotesController : ControllerBase
     {
@@ -51,7 +50,14 @@ namespace notes_service.Controllers
         [HttpGet("/api/notes")]
         public IActionResult GetAll()
         {
-            return Ok(service.GetAll(User.FindFirst("id").Value));
+            var idClaim = User.FindFirst("id");
+
+            if (idClaim == null)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(service.GetAll(idClaim.Value));
         }
 
         [HttpPut("/api/notes/{id}")]
