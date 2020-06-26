@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace notes_service.Controllers
 {
+    [Authorize]
     [ApiController]
     public class NotesController : ControllerBase
     {

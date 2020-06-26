@@ -61,7 +61,7 @@ namespace NotesService.Tests
             using (var context = new NotesContext(options))
             {
                 var service = new NoteService(context);
-                result = service.GetAll() as List<Note>;
+                result = service.GetAll(null) as List<Note>;
             }
 
             // Assert

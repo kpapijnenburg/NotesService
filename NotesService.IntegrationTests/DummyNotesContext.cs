@@ -46,7 +46,7 @@ namespace NotesService.IntegrationTests
             return Notes.FirstOrDefault(note => note.Id == id);
         }
 
-        public IEnumerable<Note> GetAll()
+        public IEnumerable<Note> GetAll(string id)
         {
             return Notes;
         }

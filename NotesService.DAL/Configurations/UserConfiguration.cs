@@ -12,11 +12,16 @@ namespace NotesService.DAL.Configurations
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder
+                .Property(u => u.Key)
+                .ValueGeneratedOnAdd();
+
+            builder
                 .HasMany(n => n.Notes)
                 .WithOne(u => u.User);
 
             builder.HasData(new User()
             {
+                Key = 1,
                 Id = new Guid("845f9dec-2c0e-4e96-97ef-a0bbb48c3a25")
             });
         }
